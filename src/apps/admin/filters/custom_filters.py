@@ -40,3 +40,9 @@ class SearchTagFilter(django_filters.Filter):
     def filter(self, qs, value):
         return qs.filter(tag_name__icontains=value)
 
+class SearchArticleFilter(django_filters.Filter):
+    """Фильтрует по полям title и content модели Article"""
+
+    @is_not_value
+    def filter(self, qs, value):
+        return qs.filter(Q(title__icontains=value) | Q(content__icontains=value))

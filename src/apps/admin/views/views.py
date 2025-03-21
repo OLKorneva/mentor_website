@@ -9,7 +9,7 @@ from apps.admin.forms import CategoryEditForm
 from apps.admin.forms.article_forms import ArticleForm
 from apps.admin.forms.tag_form import TagEditForm
 from apps.blog.models import Tag, Category, Article
-from apps.admin.filters.filters import TagFilterSet
+from apps.admin.filters.filters import TagFilterSet, SearchArticlesFilter
 from apps.core.decorators.decorators import log_request_operations
 from apps.core.mixins.paginations.mixins import PaginationMixin
 from apps.core.mixins.permissions.mixins import OnlyAdminAccessMixin
