@@ -6,6 +6,7 @@ from django.contrib.auth import get_user_model
 
 
 from apps.admin.forms import CategoryEditForm
+from apps.admin.forms.article_forms import ArticleForm
 from apps.admin.forms.tag_form import TagEditForm
 from apps.blog.models import Tag, Category, Article
 from apps.admin.filters.filters import TagFilterSet
