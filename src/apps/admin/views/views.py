@@ -196,7 +196,7 @@ class ListArticlesView(OnlyAdminAccessMixin, PaginationMixin, ListView):
                 .prefetch_related('tags')
                 .all()
                 )
-    template_name = "admin/list_articles.html"
+    template_name = "admin/articles/list_articles.html"
     # context_object_name = "articles"
     ordering = ["-id"]
 
@@ -219,7 +219,7 @@ class ListArticlesView(OnlyAdminAccessMixin, PaginationMixin, ListView):
 class CreateArticleView(OnlyAdminAccessMixin, CreateView):
     model = Article
     form_class = ArticleForm
-    template_name = "admin/create_article.html"
+    template_name = "admin/articles/create_article.html"
     success_url = reverse_lazy("admin:list_articles")
 
     @log_request_operations(logger_name="admin")
@@ -244,7 +244,7 @@ class EditArticleView(OnlyAdminAccessMixin, UpdateView):
     model = Article
     form_class = ArticleForm
     context_object_name = "article"
-    template_name = "admin/edit_article.html"
+    template_name = "admin/articles/edit_article.html"
     success_url = reverse_lazy("admin:list_articles")
 
 

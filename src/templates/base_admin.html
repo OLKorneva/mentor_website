@@ -62,9 +62,7 @@
                         </span>
                     </div>
                     <ul class="submenu">
-                        <li class="submenu__item">
-                            <a href="">Статьи</a>
-                        </li>
+                        <a href="{% url 'admin:list_articles' %}"><li class="submenu__item">Статьи</li></a>
 
                         <a href="{% url 'admin:list_tags' %}"><li class="submenu__item">Теги</li></a>
 

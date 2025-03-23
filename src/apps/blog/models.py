@@ -135,7 +135,7 @@ class Article(PublishableModel):
     )
     content = MDTextField(verbose_name="Текст", validators=(min_one_symbol_validator,))
 
-    published = models.DateTimeField(auto_now_add=True, verbose_name="Дата публикации")
+    published = models.DateTimeField(default=timezone.now, verbose_name="Дата публикации")
     updated = models.DateTimeField(auto_now=True, verbose_name="Дата обновления")
 
     author = models.ForeignKey(
