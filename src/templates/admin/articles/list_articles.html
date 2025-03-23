@@ -108,10 +108,10 @@
                             <td class="table__info_user ">{{ article.author.first_name }} {{ article.author.last_name }}</td>
                             <td class="table__info_user ">{% for tag in article.tags.all %}{{ tag.tag_name }}{% if not forloop.last %}, {% endif %}{% endfor %}</td>
                             <td class="table__info_user ">{{ article.views }}</td>
-                            <td class="table__info_user ">{{ article.comments }}</td>
+                            <td class="table__info_user ">{{ article.comment.all.count }}</td>
                             <td class="table__info_user ">{{ article.likes }}</td>
                             <td class="table__info_user ">{{ article.dislikes }}</td>
-                            <td class="table__info_user ">{{ article.created|date:"d.m.Y" }}</td>
+                            <td class="table__info_user ">{{ article.created_at|date:"d.m.Y" }}</td>
                             <td class="table__info_user ">{{ article.published|date:"d.m.Y" }}</td>
                             {% if article.is_draft %}
                             <td class="table__info_user "><input type="checkbox" checked=""></td>
