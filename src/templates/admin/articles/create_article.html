@@ -1,10 +1,171 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base_admin.html' %}
+{% load static %}
 
-</body>
-</html>
+{% block title %}
+<link href="{% static 'css/admin/article.css' %}" rel="stylesheet"/>
+<title>Создание статьи</title>
+{% endblock title %}
+
+{% block content %}
+
+<div class="article-container">
+
+    <!-- Header -->
+    <div class="setting_t">
+        <a href="{% url 'admin:list_articles' %}" class="button_back">
+            <img src="{% static 'img/chevron-left.svg' %}" alt="" />
+        </a>
+        <h3 class="title_article_btn">Создание статьи</h3>
+    </div>
+
+
+    <!-- Блок формы -->
+    <form action="{% url 'admin:create-article' %}" method="POST"
+     enctype="multipart/form-data" novalidate>
+      {% csrf_token %}
+      {{ form.media }}
+
+      <div class="info__about_article">
+
+      <!-- 2.1.1 - Загрузка файла, название, слаг -->
+      <div class="article_row1">
+          <div class="upload">
+            <input type="file" name="image" accept="image/*" id="id_image" class="hidden-file-input">
+            <div id="image-preview" class="article_user">
+              <!-- Загруженное изображение будет отображаться здесь -->
+            </div>
+            <!-- Текст с параметрами картинки -->
+            <div id="image-info" class="control">
+              <h4 class="upload_text">3Mb<br />1920x1080 px.<br />Форматы: jpg, png.</h4>
+              <img src="{% static 'img/icon_upload.svg' %}" alt="Upload Icon" />
+              <h4 class="upload_text_bottum">Загрузка изображения</h4>
+            </div>
+          </div>
+
+          <div class="error-message mt-0">
+            {% if form.icon.errors %}
+                <span class="text-danger">{{ form.image.errors.0 }}</span>
+            {% endif %}
+          </div>
+
+          <div class="title_slug">
+          <!-- Поле title -->
+            <span class="name">Название*</span>
+              <input type="text" name="title" class="article_name-input" required="" id="id_title">
+                <div class="error-message mt-0">
+                    {% if form.title.errors %}
+                        <span class="text-danger">{{ form.title.errors.0 }}</span>
+                    {% endif %}
+                </div>
+
+          <!-- Поле slug -->
+            <span class="name">Slug*</span>
+                <input type="text" name="slug" class="article_name-input" required="" id="id_slug">
+                <div class="error-message mt-0">
+                    {% if form.slug.errors %}
+                        <span class="text-danger">{{ form.slug.errors.0 }}</span>
+                    {% endif %}
+                </div>
+          </div>
+      </div>
+
+      <!-- 2.1.2 - Поле для ввода контента -->
+      <div class="markdown">
+          {{ form.content }}
+          {% if form.content.errors %}
+            <span style="left: 300px; top: 357px; position: absolute; color:#a94442">{{ form.content.errors }}</span>
+          {% endif %}
+      </div>
+
+      <div class="article_row3">
+      <!-- 2.1.3 - Дата, теги, категория, автор -->
+        <div class="date">
+            <div class="input-datetime">
+                <div class="input-datetime-item">
+                  <label for="published1" class="name">Дата и время публикации*:</label>
+                  <input type="datetime-local" id="published1" name="published" value="{{ form.published.value|default_if_none:'' }}">
+                  <!-- Ошибки формы -->
+                  {{ form.published.errors }}
+                </div>
+            </div>
+        </div>
+
+        <div class="tags_cat_author">
+
+            <!-- Контейнер для выпадающего списка -->
+            <div class="dropdown-container">
+                <!-- Кнопка для открытия/закрытия выпадающего списка -->
+                <div class="dropdown-button" id="dropdownButton">
+                    Теги*
+                  <i id="dropdownIcon" class="fas fa-chevron-down"></i>
+                </div>
+
+                <!-- Выпадающий список -->
+                <ul class="dropdown-menu" id="dropdownMenu">
+                    {% for tag in form.tags.field.queryset %}
+                        <li class="dropdown-item">
+                            <label>
+                                {{ tag.tag_name }}
+                                <input
+                                    type="checkbox"
+                                    name="{{ form.tags.name }}"
+                                    value="{{ tag.pk }}"
+                                    {% if tag.pk in form.tags.value %}checked{% endif %}
+                                    style="margin-left: auto"
+                                >
+                            </label>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+         <div>
+              {% if form.tags.errors %}
+              <span style="left: 622px; top: 771px; position: absolute; color:#a94442">{{ form.tags.errors }}</span>
+              {% endif %}
+          </div>
+
+              <!-- Категория -->
+              <div>
+                  {{ form.category }}
+                  {% if form.category.errors %}
+                  <span style="left: 882px; top: 770px; position: absolute; color:#a94442">{{ form.category.errors }}</span>
+                  {% endif %}
+              </div>
+
+
+              <!-- Автор -->
+              <div>
+                  {{ form.author }}
+                  {% if form.author.errors %}
+                  <span style="left: 622px; top: 833px; position: absolute; color:#a94442">{{ form.author.errors }}</span>
+                  {% endif %}
+              </div>
+      </div>
+      </div>
+
+      <!-- 2.1.4 - Чекбокс, кнопки -->
+      <div class="row">
+          <div class="checkbox-is-draft-article-create">
+            <input type="checkbox" id="{{ form.is_draft.id_for_label }}"
+             {% if form.is_draft.value %} checked {% endif %} name="{{ form.is_draft.name }}">
+            <label class="form-check-label" for="{{ form.is_draft.id_for_label }}">Черновик</label>
+
+
+          <div class="buttons">
+            <div>
+              <button class="cancel" href="{% url 'admin:list_articles' %}">Отмена</button>
+              <button class="save" type="submit">Создать</button>
+            </div>
+
+          </div>
+
+      </div>
+
+            </form>
+</div>
+
+    </div>
+</div>
+
+{% endblock content %}
