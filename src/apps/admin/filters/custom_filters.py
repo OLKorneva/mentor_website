@@ -46,3 +46,10 @@ class SearchArticleFilter(django_filters.Filter):
     @is_not_value
     def filter(self, qs, value):
         return qs.filter(Q(title__icontains=value) | Q(content__icontains=value))
+
+class SearchCommentFilter(django_filters.Filter):
+    """Фильтрует по полям author.first_name и article.title модели Comment"""
+
+    @is_not_value
+    def filter(self, qs, value):
+        return qs.filter(Q(author__first_name__icontains=value) | Q(article__title__icontains=value))

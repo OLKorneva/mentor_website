@@ -21,4 +21,8 @@ urlpatterns = [
     path("list-articles/", views.ListArticlesView.as_view(), name="list_articles"),
     path("create/article/", views.CreateArticleView.as_view(), name="create-article"),
     path("edit/article/<slug:slug>/", views.EditArticleView.as_view(), name="edit-article"),
+
+    path("list-comments/", views.ListCommentsView.as_view(), name="list_comments"),
+    #path("create/article/", views.CreateArticleView.as_view(), name="create-article"),
+    #path("edit/article/<slug:slug>/", views.EditArticleView.as_view(), name="edit-article"),
 ]

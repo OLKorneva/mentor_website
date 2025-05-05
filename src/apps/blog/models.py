@@ -197,7 +197,7 @@ class ArticleTag(models.Model):
         return f"Статья {self.article} - тег {self.tag}"
 
 
-class Comment(models.Model):
+class Comment(PublishableModel):
     article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name="comment")
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -209,6 +209,7 @@ class Comment(models.Model):
     html_content = models.TextField(
         max_length=500, verbose_name="Текст", validators=(min_one_symbol_validator,)
     )
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
     date_publication = models.DateTimeField(verbose_name="Дата публикации", default= timezone.now)
     parent_comment = models.ForeignKey(
         "self",

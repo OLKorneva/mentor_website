@@ -1,9 +1,11 @@
 from django.contrib.auth import get_user_model
 
 import django_filters
+from django import forms
 
-from .custom_filters import CustomEndDateFilter, SearchFilter, SearchTagFilter, SearchArticleFilter
-from apps.blog.models import Tag, Article
+
+from .custom_filters import CustomEndDateFilter, SearchFilter, SearchTagFilter, SearchArticleFilter, SearchCommentFilter
+from apps.blog.models import Tag, Article, Comment
 
 
 class SearchUserFilter(django_filters.FilterSet):
@@ -41,3 +43,13 @@ class SearchArticlesFilter(django_filters.FilterSet):
     class Meta:
         model = Article
         fields = []
+
+
+class CommentFilterSet(django_filters.FilterSet):
+    search = SearchCommentFilter()  # Поиск по вхождению
+    created_at_after = django_filters.DateTimeFilter(field_name="date_publication", lookup_expr="gte")
+    created_at_before = django_filters.DateTimeFilter(field_name="date_publication", lookup_expr="lte")
+
+    class Meta:
+        model = Comment
+        fields = []  # Оставляем пустым, так как 'search' не является полем модели

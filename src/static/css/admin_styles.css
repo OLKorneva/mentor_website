@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'Montserrat-SemiBold';
+    src: url('/static/fonts/Montserrat-SemiBold.ttf') format('truetype');
+}
+
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -159,7 +164,7 @@ th {
 }
 
 .edit-btn i {
-    font-family: "Font Awesome 5 Free";
+    font-family: "Font Awesome 5 Free", sans-serif;
     font-weight: 900;
 }
 
@@ -219,3 +224,38 @@ th {
     /*transform: scale(1.1); !* Увеличивает чекбокс *!*/
 }
 
+.filter-box label {
+    font-family: Montserrat-SemiBold, sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 150%;
+    letter-spacing: 0;
+    vertical-align: bottom;
+}
+
+.filter-box input {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px;
+    gap: 10px;
+    width: 50%;
+    margin-top: 5px;
+    margin-right: 10px;
+
+    background: #FCFAFA;
+
+    border: 1px solid #40446F;
+    border-radius: 2px;
+
+    font-family: 'SuboleyaRegular', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0;
+    vertical-align: bottom;
+}
+
+.filter-box-row {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+}
