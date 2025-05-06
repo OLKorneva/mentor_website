@@ -3,6 +3,15 @@
     src: url('/static/fonts/Montserrat-SemiBold.ttf') format('truetype');
 }
 
+@font-face {
+    font-family: 'SuboleyaRegular';
+    src: url('/static/fonts/SuboleyaRegular.ttf') format('truetype');
+}
+
+html {
+    background-color: #f1f1f1;
+}
+
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -19,6 +28,7 @@ body {
     flex-direction: column;
     padding: 20px;
     border-right: 1px solid #838dd1;
+    height: 100vh;
 }
 
 .sidebar .logo {
@@ -108,9 +118,26 @@ table {
 }
 
 .table-container {
-    width: 80%; /* Ширина контейнера с таблицей */
+    width: 100%; /* Ширина контейнера с таблицей */
     overflow-x: auto; /* Для горизонтальной прокрутки */
 }
+
+.custom-table th, .custom-table td {
+        padding: 8px;
+        white-space: nowrap;
+        max-width: 150px; /* Ограничение ширины */
+        overflow: hidden;
+        text-overflow: ellipsis; /* Обрезка длинного текста */
+    }
+
+.custom-table th:last-child, .custom-table td:last-child {
+        width: 50px; /* Фиксированная ширина для столбца с карандашом */
+    }
+
+.custom-table th, .custom-table td {
+        white-space: nowrap; /* Предотвращает перенос текста */
+        padding: 8px;
+    }
 
 thead {
     background-color: #f0f0f0;
@@ -170,17 +197,15 @@ th {
 
 .filter-container {
     width: 20%; /* Ширина контейнера с фильтром */
-    background-color: #fff;
-    padding: 10px;
+    padding: 5px;
 }
 
 .filter {
     width: 100%;
-    background: #fff;
     padding: 10px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    margin-left: 20px;
+    margin-left: 0;
+    margin-top: 15px;
+    margin-right: 10px;
     max-width: 300px;
 }
 
@@ -210,8 +235,14 @@ th {
     background-color: #6c63ff;
     color: #fff;
     border: none;
-    border-radius: 4px;
+    border-radius: 8px;
     cursor: pointer;
+
+    font-family: "SuboleyaRegular", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 150%;
+    letter-spacing: 0;
 }
 
 .filter button:hover {
@@ -224,38 +255,73 @@ th {
     /*transform: scale(1.1); !* Увеличивает чекбокс *!*/
 }
 
+
+.filter-box {
+    width: 100%;
+    max-width: 100%;
+    overflow: visible;
+}
+
 .filter-box label {
     font-family: Montserrat-SemiBold, sans-serif;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 600;
     line-height: 150%;
     letter-spacing: 0;
-    vertical-align: bottom;
+    display: block;
+    margin-bottom: 8px;
 }
 
 .filter-box input {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 10px;
-    gap: 10px;
-    width: 50%;
+    display: block;
+    width: 48%;
+    height: 25px;
+    max-width: 140px; /* Базовая ширина для больших экранов */
+    padding: 2px 2px;
     margin-top: 5px;
-    margin-right: 10px;
-
+    margin-bottom: 8px;
     background: #FCFAFA;
-
     border: 1px solid #40446F;
     border-radius: 2px;
-
     font-family: 'SuboleyaRegular', sans-serif;
-    font-size: 12px;
+    font-size: 10px;
     letter-spacing: 0;
-    vertical-align: bottom;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
 
 .filter-box-row {
     display: flex;
     flex-direction: row;
-    align-items: baseline;
+    flex-wrap: unset; /* Поля остаются в ряд */
+    gap: 10px; /* Пространство между полями */
+    align-items: flex-start;
+    max-width: 100%;
+}
+
+/* Уменьшение размера полей на маленьких экранах */
+@media screen and (max-width: 768px) {
+    .filter-box input[type="date"] {
+        max-width: 120px; /* Уменьшенная ширина */
+        font-size: 12px;
+        padding: 5px 7px;
+    }
+    .filter-box-row {
+        gap: 8px;
+    }
+}
+
+/* Расположение в столбец на экстремально маленьких экранах */
+@media screen and (max-width: 400px) {
+    .filter-box-row {
+        flex-direction: column; /* Поля в столбец */
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+    .filter-box input[type="date"] {
+        max-width: 100%; /* Поля на всю ширину */
+        margin-right: 0;
+    }
 }

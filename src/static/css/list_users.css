@@ -1,4 +1,4 @@
-.main{
+.main {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -6,33 +6,50 @@
 
 .table-header {
     display: flex;
-    justify-content: space-between;
+    flex-direction: row;
+    justify-content: space-between; /* Кнопка слева, поиск и пагинация справа */
     align-items: center;
-    padding: 17px 15px 15px 10px;
+    padding-bottom: 10px;
+    width: 100%;
+    gap: 20px; /* Уменьшено с 40px для компактности */
+}
+
+.search-pagination-group {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Пространство между поиском и пагинацией */
 }
 
 .search-input {
-    padding: 8px 10px;
     font-size: 14px;
     border-radius: 4px;
-    max-width: 384px;
+    width: 300px;
+    max-width: 420px;
     height: 42px;
     opacity: 0.85;
 }
+
 .search-input:focus,
-.search-input:active{
-    border: #838dd1;
+.search-input:active {
+    border: 1px solid #838dd1;
 }
 
 .pagination-controls {
     display: flex;
+    flex-direction: row;
     align-items: center;
-    gap: 10px;
-    
+    gap: 15px; /* Увеличено для большего расстояния между элементами */
+    width: auto; /* Убираем фиксированную ширину 50% */
+    max-width: 100%;
+}
+
+.prev-btn {
+    margin-left: 0;
+    margin-right: -10px;
 }
 
 .prev-btn,
-.next-btn{
+.next-btn {
     border: 1px solid #40446f;
     border-radius: 2px;
     width: 25px;
@@ -42,78 +59,133 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    
 }
 
 .prev-btn:hover,
 .next-btn:hover,
 .prev-btn:active,
-.next-btn:active{
+.next-btn:active {
     transition: transform 0.3s ease, color 0.3s ease;
     border: 1px solid #838dd1;
     background: #40446f;
-
 }
 
 .rows-select {
-    border-radius: 4px;
     color: white;
     background-color: #838dd1;
-    border-radius: 2px;
-    padding: 5px 10px;
+    border-radius: 8px;
     width: 130px;
     height: 28px;
-    font-family: "Montserrat", sans-serif;
-    font-weight: 600;
-    font-size: 14px; 
-    line-height: 1.5;
-   
+    align-items: center;
+    padding-left: 5px;
+
+    font-family: "SuboleyaRegular", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 150%;
+    letter-spacing: 0;
 }
 
 .create-btn {
-    
     background-color: #838dd1;
     color: white;
     cursor: pointer;
-    font-size: 14px;
     border-radius: 8px;
     padding: 10px 20px;
-    width: 195px;
-    height: 44px;
-    transition: background-color  0.3s;
+    width: 200px; /* Уменьшено с 350px для компактности */
+    height: 28px;
+    transition: background-color 0.3s;
     display: flex;
     text-align: center;
     justify-content: center;
     align-items: center;
-}
-.create-btn:hover{
-    background-color: #8d98e0; 
+    margin-left: 0; /* Убираем отступ слева */
+    margin-right: 0;
 
+    font-family: "SuboleyaRegular", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 150%;
+    letter-spacing: 0;
 }
-.btns_fltr{
+
+.create-btn:hover {
+    background-color: #8d98e0;
+}
+
+.btns_fltr {
     display: flex;
     flex-direction: column;
     justify-content: center;
+
+    font-family: "SuboleyaRegular", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 150%;
+    letter-spacing: 0;
 }
 
-.fltr_btn{
+.fltr_btn {
     background-color: #838dd1 !important;
     color: white;
     cursor: pointer;
-    font-size: 14px;
     border-radius: 8px;
     padding: 10px 20px;
     width: 100%;
-    height: 44px;
-    transition: background-color  0.3s;
+    height: 30px;
+    transition: background-color 0.3s;
     display: flex;
     text-align: center;
     justify-content: center;
     align-items: center;
     margin-bottom: 10px;
-
 }
-.fltr_btn:hover{
-    background-color: #9ba5e6 !important; 
 
+.fltr_btn:hover {
+    background-color: #9ba5e6 !important;
+}
+
+/* Адаптивность */
+@media screen and (max-width: 768px) {
+    .table-header {
+        flex-direction: column; /* Элементы в столбец */
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .search-pagination-group {
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 100%;
+        justify-content: flex-end; /* Поиск и пагинация справа */
+    }
+
+    .search-input {
+        width: 100%;
+        max-width: 100%;
+        margin-left: 5px;
+        padding-left: 5px;
+    }
+
+    .pagination-controls {
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+    }
+
+    .create-btn {
+        width: 150px;
+        padding: 8px 15px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .create-btn {
+        width: 100%;
+    }
+
+    .search-pagination-group {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 }

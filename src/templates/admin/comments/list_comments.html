@@ -20,7 +20,7 @@
 
                     <input  type="hidden" placeholder=" Search" name="page_size" value="{{ request.GET.page_size }}">
 
-                    <input type="text" class="search-input" name="search" placeholder="Search"
+                    <input type="text" class="search-input" name="search" placeholder="Поиск по имени автора и названию статьи"
                            value="{{ request.GET.search }}">
                 </form>
 
@@ -110,6 +110,17 @@
                 </table>
             </div>
 
+
+
+
+
+    </div>
+</div>
+
+{% endblock content %}
+
+
+{% block filter %}
         <!-- Новый контейнер для блока фильтрации -->
         <div class="filter-container">
             <div class="filter">
@@ -137,10 +148,4 @@
                 </form>
             </div>
         </div>
-
-
-
-    </div>
-</div>
-
-{% endblock content %}
+{% endblock %}
